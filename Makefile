@@ -6,7 +6,8 @@ default: pi-image
 
 # Fetch files
 pibase.img.xz:
-	./fettch-current.sh $@
+	pwd
+	./fetch-current.sh $@
 
 u-boot.bin:
 	curl -O https://versaweb.dl.sourceforge.net/project/rpi4-8gbram-boot-fbsdonly/u-boot.bin
@@ -36,7 +37,15 @@ install-u-boot: $(UBOOT_FILES) /dev/md$(MDNO)s1
 detach:
 	sudo mdconfig -d -u $(MDNO)
 
-pi-image: attach install-u-boot detach
+$(IMAGE_NAME).zip:$(IMAGE_NAME)
+	zip $(IMAGE_NAME).zip $(IMAGE_NAME)
+
+zip: $(IMAGE_NAME).zip
+
+pi-image: attach install-u-boot detach zip
+
+pi-image-dd: $(IMAGE_NAME).zip
+
 
 clean:
-	rm pibase.img.xz $(UBOOT_FILES)
+	rm pibase.img.xz $(UBOOT_FILES) $(IMAGE_NAME)
