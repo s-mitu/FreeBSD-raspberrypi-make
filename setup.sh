@@ -45,7 +45,7 @@ ibus-daemon -r --daemonize --xim
 # wm
 exec fluxbox
 EOM
-chmod freebsd:freebsd /home/freebsd/.xinitrc
+chown freebsd:freebsd /home/freebsd/.xinitrc
 
 # install xfce4
 pkg install -y x11-wm/xfce4-wm  x11-wm/xfce4-session  x11-wm/xfce4-panel  x11-wm/xfce4-desktop  sysutils/xfce4-settings xfce4-terminal
