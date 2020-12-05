@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# fstab
+sed -i.orig 's/rw /rw,noatime /' /etc/fstab
+
 # zoneinfo
 cp /usr/share/zoneinfo/Japan /etc/localtime 
 
